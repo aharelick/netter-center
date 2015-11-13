@@ -236,12 +236,16 @@ def join_from_invite(user_id, token):
 
 @account.before_app_request
 def before_request():
-    """Force user to confirm email before accessing login-required routes."""
-    if current_user.is_authenticated() \
-            and not current_user.confirmed \
-            and request.endpoint[:8] != 'account.' \
-            and request.endpoint != 'static':
-        return redirect(url_for('account.unconfirmed'))
+    """
+    Force user to confirm email and be checked by an administrator
+    before accessing login-required routes.
+    """
+    if current_user.is_authenticated() and request.endpoint is not None and \
+            request.endpoint[:8] != 'account.' and request.endpoint != 'static':
+        if not current_user.confirmed:
+            return redirect(url_for('account.unconfirmed'))
+        elif not current_user.admin_check:
+            return redirect(url_for('account.admin_check'))
 
 
 @account.route('/unconfirmed')
@@ -250,3 +254,11 @@ def unconfirmed():
     if current_user.is_anonymous() or current_user.confirmed:
         return redirect(url_for('main.index'))
     return render_template('account/unconfirmed.html')
+
+
+@account.route('/admin-check')
+def admin_check():
+    """Catch users not confirmed by an administrator."""
+    if current_user.is_anonymous() or current_user.admin_check:
+        return redirect(url_for('main.index'))
+    return render_template('account/admin_check.html')

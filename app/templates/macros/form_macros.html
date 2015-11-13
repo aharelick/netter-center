@@ -76,17 +76,27 @@
 
 {# Render a field for the form #}
 {% macro render_form_field(field, extra_classes='') %}
-    {% if field.type == 'Radio Field' %}
-        {% set extra_classes = extra_classes + ' grouped fields' %}
+    {% if field.type == 'RadioField' %}
+        <div class="grouped fields">
+            {{ field.label }}
+            {% for item in field %}
+                <div class="field {% if field.errors %}error{% endif %} {{ extra_classes }}">
+                    <div class="ui radio checkbox">
+                        {{ item }}
+                        {{ item.label }}
+                    </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="field {% if field.errors %}error{% endif %} {{ extra_classes }}">
+            {{ render_form_input(field) }}
+            {% if field.errors %}
+                <div class="ui red pointing label">
+                    {{ field.errors[0] | safe }}
+                </div>
+            {% endif %}
+        </div>
     {% endif %}
-    <div class="field {% if field.errors %}error{% endif %} {{ extra_classes }}">
-        {{ render_form_input(field) }}
-        {% if field.errors %}
-            <div class="ui red pointing label">
-                {{ field.errors[0] | safe }}
-            </div>
-        {% endif %}
-    </div>
 {% endmacro %}
 
 {% macro render_form_input(field) %}
@@ -95,13 +105,6 @@
             {{ field }}
             {{ field.label }}
         </div>
-    {% elif field.type == 'RadioField' %}
-        {% for item in field %}
-            <div class="ui radio checkbox">
-                {{ field }}
-                {{ field.label }}
-            </div>
-        {% endfor %}
     {% elif field.type == 'SubmitField' %}
         {{ field(class='ui button') }}
     {% elif field.type == 'FormField' %}

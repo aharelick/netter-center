@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms.fields import StringField, PasswordField, SubmitField
+from wtforms.fields import StringField, PasswordField, SubmitField, RadioField
 from wtforms.fields.html5 import EmailField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
@@ -57,3 +57,12 @@ class NewUserForm(InviteUserForm):
     password2 = PasswordField('Confirm password', validators=[InputRequired()])
 
     submit = SubmitField('Create')
+
+
+class AdminCheckForm(Form):
+    admin_check = RadioField('User Confirmed',
+                             validators=[InputRequired()],
+                             choices=[
+                                ('y', 'Confirmed'),
+                                ('n', 'Not Confirmed')])
+    submit = SubmitField('Save')

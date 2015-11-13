@@ -8,6 +8,7 @@ from forms import (
     NewUserForm,
     ChangeAccountTypeForm,
     InviteUserForm,
+    AdminCheckForm
 )
 from . import admin
 from ..models import User, Role
@@ -159,3 +160,28 @@ def delete_user(user_id):
         db.session.commit()
         flash('Successfully deleted user %s.' % user.full_name(), 'success')
     return redirect(url_for('admin.registered_users'))
+
+
+@admin.route('/user/<int:user_id>/admin-check', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def admin_check(user_id):
+    if current_user.id == user_id:
+        flash('You cannot change your own administrator confirmation. Please '
+              'ask another administrator to do this.', 'error')
+        return redirect(url_for('admin.user_info', user_id=user_id))
+    else:
+        user = User.query.filter_by(id=user_id).first()
+        if user is None:
+            abort(404)
+        form = AdminCheckForm()
+        if form.validate_on_submit():
+            user.admin_check = form.admin_check.data == 'y'
+            db.session.add(user)
+            db.session.commit()
+            flash('User {}\'s confirmation status has been updated.'
+                  .format(user.full_name()), 'form-success')
+        else:
+            form.admin_check.data = 'y' if user.admin_check else 'n'
+        return render_template('admin/manage_user.html', user=user, form=form)
+
