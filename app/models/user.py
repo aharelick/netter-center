@@ -48,6 +48,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     confirmed = db.Column(db.Boolean, default=False)
+    admin_check = db.Column(db.Boolean, default=False)
     first_name = db.Column(db.String(64), index=True)
     last_name = db.Column(db.String(64), index=True)
     email = db.Column(db.String(64), unique=True, index=True)
@@ -184,6 +185,7 @@ class User(UserMixin, db.Model):
             email=email,
             password=password,
             confirmed=True,
+            admin_check=True,
             role=Role.query.filter_by(
                 permissions=Permission.ADMINISTER).first()
         )
@@ -195,7 +197,6 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User \'%s\'>' % self.full_name()
-
 
 
 class AnonymousUser(AnonymousUserMixin):
