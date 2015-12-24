@@ -16,7 +16,7 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
-    ADMIN_EMAIL = 'flask-base-admin@example.com'
+    ADMIN_EMAIL = 'nettercenterdatabase@gmail.com'
     EMAIL_SUBJECT_PREFIX = '[{}]'.format(APP_NAME)
     EMAIL_SENDER = '{app_name} Admin <{email}>'.format(app_name=APP_NAME,
                                                        email=MAIL_USERNAME)

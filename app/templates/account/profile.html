@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+  <div class="ui vertical stripe">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="six wide left floated column">
+          <img src="https://scontent.fash1-1.fna.fbcdn.net/hphotos-xfp1/v/t1.0-9/11009860_10152941844473192_7744079734053659533_n.jpg?oh=c461b8871fed3079ea689c57ca27c829&oe=568687FF" class="ui large bordered rounded image">
+        </div>
+        <div class="ui vertical divider"></div>
+          <div class="eight wide column">
+            <h3 class="ui header">{{ user.full_name() }}</h3>
+            <a class="ui red ribbon label">User Type</a>
+            <p>Student</p>
+            <a class="ui red ribbon label">Hometown</a>
+            <p>White Plains, NY</p>
+            <a class="ui red ribbon label">Email</a>
+            <p>{{ user.email }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="fourteen wide column">
+          <h2 class="ui header">Bio</h2>
+          <p>I'm a senior in the Networked & Social Systems Program at the University of Pennsylvania. I am currently pursuing my interest in social impact and technology by building the Netter Center Directory. I'm also a current member of Hack4Impact, a club on campus that partners with non profits to advance them technically.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="fourteen wide column stackable">
+          <h2 class="ui header">Tags</h2>
+          <div class="ui label two wide">Math/Science<i class="delete icon"></i></div>
+          <div class="ui label two wide">Middle School<i class="delete icon"></i></div>
+          <div class="ui label two wide">Disabled Students<i class="delete icon"></i></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="fourteen wide column">
+          <h2 class="ui header">Publications</h2>
+          <div class="ui bulleted list">
+            <div class="item">Publication 1</div>
+            <div class="item">Publication 2</div>
+            <div class="item">Publication 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

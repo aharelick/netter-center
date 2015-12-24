@@ -23,3 +23,125 @@ nav .mobile.only.row .ui.vertical.menu {
 table.selectable tr:hover {
   cursor: pointer !important;
 }
+
+@media -sass-debug-info{filename{}line{font-family:\0000334}}
+.hidden.menu {
+  display: none;
+}
+
+@media -sass-debug-info{filename{}line{font-family:\0000338}}
+.pusher .masthead.segment {
+  min-height: 700px;
+  padding: 1em 0em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000342}}
+.pusher .masthead .logo.item img {
+  margin-right: 1em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000345}}
+.pusher .masthead .ui.menu .ui.button {
+  margin-left: 0.5em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000348}}
+.pusher .masthead h1.ui.header {
+  margin-top: 3em;
+  margin-bottom: 0em;
+  font-size: 4em;
+  font-weight: normal;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000354}}
+.pusher .masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000359}}
+.pusher .ui.vertical.stripe {
+  padding: 8em 0em 4em 0em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000362}}
+.pusher .ui.vertical.stripe h3 {
+  font-size: 2em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000365}}
+.pusher .ui.vertical.stripe .button + h3,
+.pusher .ui.vertical.stripe p + h3 {
+  margin-top: 3em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000369}}
+.pusher .ui.vertical.stripe .floated.image {
+  clear: both;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000372}}
+.pusher .ui.vertical.stripe p {
+  font-size: 1.33em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000375}}
+.pusher .ui.vertical.stripe .horizontal.divider {
+  margin: 3em 0em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000379}}
+.pusher .quote.stripe.segment {
+  padding: 0em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000382}}
+.pusher .quote.stripe.segment .grid .column {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000387}}
+.pusher .footer.segment {
+  padding: 5em 0em;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000391}}
+.pusher .secondary.pointing.menu .toc.item {
+  display: none;
+}
+@media -sass-debug-info{filename{}line{font-family:\0000395}}
+.pusher .modal form {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003100}}
+.pusher .search-results {
+  padding: 8em 0em 4em 0em;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003103}}
+.pusher .search-results .ui.items > .item > .content {
+  margin-top: 1em;
+}
+@media -sass-debug-info{filename{}line{font-family:\00003106}}
+.pusher .search-results .ui.sticky {
+  margin-top: 60px !important;
+  width: 272px !important;
+  height: 262px !important;
+  left: 283px;
+}
+@media only screen and (max-width: 700px) {
+@media -sass-debug-info{filename{}line{font-family:\00003114}}
+  .pusher .ui.fixed.menu {
+    display: none !important;
+  }
+@media -sass-debug-info{filename{}line{font-family:\00003117}}
+  .pusher .secondary.pointing.menu .item,
+  .pusher .secondary.pointing.menu .menu {
+    display: none;
+  }
+@media -sass-debug-info{filename{}line{font-family:\00003121}}
+  .pusher .secondary.pointing.menu .toc.item {
+    display: block;
+  }
+@media -sass-debug-info{filename{}line{font-family:\00003124}}
+  .pusher .masthead.segment {
+    min-height: 350px;
+  }
+@media -sass-debug-info{filename{}line{font-family:\00003127}}
+  .pusher .masthead h1.ui.header {
+    font-size: 2em;
+    margin-top: 1.5em;
+  }
+@media -sass-debug-info{filename{}line{font-family:\00003131}}
+  .pusher .masthead h2 {
+    margin-top: 0.5em;
+    font-size: 1.5em;
+  }
+}

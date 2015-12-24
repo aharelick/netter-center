@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, abort
 from flask.ext.login import (
     login_required,
     login_user,
@@ -232,6 +232,21 @@ def join_from_invite(user_id, token):
                    user_id=new_user.id,
                    token=token)
     return redirect(url_for('main.index'))
+
+
+@account.route('/profile')
+@login_required
+def my_profile():
+    return redirect(url_for('account.profile', user_id=current_user.id))
+
+
+@account.route('/profile/<int:user_id>')
+@login_required
+def profile(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        abort(404)
+    return render_template('account/profile.html', user=user)
 
 
 @account.before_app_request

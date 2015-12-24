@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    {% include 'partials/_head.html' %}
+
+    <body>
+      <div class="ui large top fixed hidden menu">
+        <div class="ui container">
+          <div class="right menu">
+            <div class="item">
+              <a href="{{ url_for('account.login') }}" class="ui button">Log in</a>
+            </div>
+            <div class="item">
+              <a href="{{ url_for('account.register') }}" class="ui primary button">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pusher">
+        <div class="ui inverted vertical masthead center aligned segment">
+          <div class="ui container">
+            <div class="ui large secondary inverted pointing menu">
+              <div class="right item">
+                <a href="{{ url_for('account.login') }}" class="ui inverted button">Log in</a>
+                <a href="{{ url_for('account.register') }}" class="ui inverted button">Sign Up</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui text container">
+            <h1 class="ui inverted header">Netter Center Directory</h1>
+            <h2>The doorway to community service in Philadelphia</h2>
+          </div>
+        </div>
+
+        <div class="ui vertical stripe segment">
+          <div class="ui middle aligned stackable grid container">
+            <div class="row">
+              <div class="eight wide column">
+                <h3 class="ui header">The Directory</h3>
+                <p>Giving you access to the institutional knowledge the Netter Center has accumulated through it's various parternships with the Philadelphia community.</p>
+                <h3 class="ui header">About the Netter Center</h3>
+                <p>Founded in 1992, the Barbara and Edward Netter Center for Community Partnerships is Penn’s primary vehicle for bringing to bear the broad range of human knowledge needed to solve the complex, comprehensive, and interconnected problems of the American city so that West Philadelphia (Penn’s local geographic community), Philadelphia, the University itself, and society benefit.</p>
+              </div>
+              <div class="eight wide right floated column">
+                <img src="https://www.nettercenter.upenn.edu/sites/netter_internal/files/imagecache/homepage_carousel/sites/nettercenter.upenn.edu/files/homepage_3.jpg" class="ui rounded image">
+              </div>
+            </div>
+            <div class="row">
+              <div class="center aligned column">
+                <a href="{{ url_for('account.register') }}" class="ui huge button">Get Access</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui inverted vertical footer segment">
+          <div class="ui container">
+            <div class="ui stackable inverted divided equal height stackable grid">
+              <div class="three wide column">
+                <h4 class="ui inverted header">About</h4>
+                <div class="ui inverted link list">
+                  <a href="#" class="item">Sitemap</a>
+                  <a href="#" class="item">Contact Us</a>
+                  <a href="#" class="item">Link 1</a>
+                  <a href="#" class="item">Link 2</a>
+                </div>
+              </div>
+              <div class="three wide column">
+                <h4 class="ui inverted header">Services</h4>
+                <div class="ui inverted link list">
+                  <a href="#" class="item">Service 1</a>
+                  <a href="#" class="item">Service 2</a>
+                  <a href="#" class="item">Service 3</a>
+                  <a href="#" class="item">Service 4</a>
+                </div>
+              </div>
+              <div class="seven wide column">
+                <h4 class="ui inverted header">Where to find Us?</h4>
+                <p>111 South 38th Street, Second Floor, Philadelphia, PA 19104. 215-898-5351.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function() {
+          // fix menu when passed
+          $('.masthead').visibility({
+            once: false,
+            onBottomPassed: function () {
+              $('.fixed.menu').transition('fade in');
+            },
+            onBottomPassedReverse: function () {
+              $('.fixed.menu').transition('fade out');
+            }
+          });
+          // create sidebar and attach to menu open
+          $('.ui.sidebar').sidebar('attach events', '.toc.item');
+        });
+      </script>
+    </body>
+</html>
