@@ -135,3 +135,16 @@ table.selectable tr:hover {
     }
   }
 }
+
+.profile-pic {
+  max-height: 400px;
+}
+
+// TODO specify more selectors
+.ui.label.user-tag {
+  margin-bottom: 10px;
+}
+
+.user-info {
+  margin-bottom: 10px;
+}

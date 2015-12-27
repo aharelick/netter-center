@@ -4,10 +4,18 @@ from wtforms.fields import (
     StringField,
     PasswordField,
     BooleanField,
-    SubmitField
+    SubmitField,
+    TextAreaField
 )
-from wtforms.fields.html5 import EmailField
-from wtforms.validators import InputRequired, Length, Email, EqualTo
+from wtforms.fields.html5 import EmailField, URLField
+from wtforms.validators import (
+    InputRequired,
+    Length,
+    Email,
+    EqualTo,
+    Optional,
+    URL
+)
 from wtforms import ValidationError
 from ..models import User
 
@@ -112,3 +120,28 @@ class ChangeEmailForm(Form):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Email already registered.')
+
+
+class EditProfileForm(Form):
+    first_name = StringField('First name', validators=[
+        InputRequired(),
+        Length(1, 64)
+    ])
+    last_name = StringField('Last name', validators=[
+        InputRequired(),
+        Length(1, 64)
+    ])
+    hometown = StringField('Hometown', validators=[
+        Length(1, 64),
+        Optional()
+    ])
+    profile_pic = URLField('Link to Profile Picture', validators=[
+        URL(),
+        Optional()
+    ])
+    bio = TextAreaField('Bio', validators=[
+        Length(1, 64),
+        Optional()
+    ])
+
+    submit = SubmitField('Save')

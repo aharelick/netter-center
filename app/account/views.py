@@ -16,7 +16,8 @@ from .forms import (
     ChangePasswordForm,
     ChangeEmailForm,
     RequestResetPasswordForm,
-    ResetPasswordForm
+    ResetPasswordForm,
+    EditProfileForm
 )
 
 
@@ -238,6 +239,19 @@ def join_from_invite(user_id, token):
 @login_required
 def my_profile():
     return redirect(url_for('account.profile', user_id=current_user.id))
+
+
+@account.route('/profile/edit', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    user = User.query.get(current_user.id)
+    form = EditProfileForm(obj=user)
+    if form.validate_on_submit():
+        form.populate_obj(user)
+        # TODO I don't think this actually gets displayed
+        flash('Your information was successfully changed.', 'form-success')
+        return redirect(url_for('account.my_profile'))
+    return render_template('account/edit_profile.html', form=form)
 
 
 @account.route('/profile/<int:user_id>')
