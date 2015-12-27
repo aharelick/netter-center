@@ -56,7 +56,7 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     hometown = db.Column(db.String(64), default='')
     bio = db.Column(db.Text, default='')
-    profile_pic = db.Column(db.String(64), default='')
+    profile_pic = db.Column(db.Text, default='')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)

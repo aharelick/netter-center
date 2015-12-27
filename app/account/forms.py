@@ -139,9 +139,6 @@ class EditProfileForm(Form):
         URL(),
         Optional()
     ])
-    bio = TextAreaField('Bio', validators=[
-        Length(1, 64),
-        Optional()
-    ])
+    bio = TextAreaField('Bio', validators=[Optional()])
 
     submit = SubmitField('Save')
