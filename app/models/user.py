@@ -54,6 +54,9 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    hometown = db.Column(db.String(64), default='')
+    bio = db.Column(db.Text, default='')
+    profile_pic = db.Column(db.Text, default='')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -165,7 +168,11 @@ class User(UserMixin, db.Model):
                 email=fake.email(),
                 password=fake.password(),
                 confirmed=True,
+                admin_check=True,
                 role=choice(roles),
+                bio=fake.paragraph(),
+                hometown=(fake.city() + ', ' + fake.state_abbr()),
+                profile_pic=fake.image_url(),
                 **kwargs
             )
             db.session.add(u)

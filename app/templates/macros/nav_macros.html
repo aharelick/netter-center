@@ -17,13 +17,29 @@
     {% endif %}
 {% endmacro %}
 
-{% macro account_items(current_user) %}
+{% macro dropdown_items(current_user) %}
     {% if current_user.is_authenticated() %}
+        <a href="{{ url_for('account.my_profile') }}" class="item">Your Profile</a>
+        <a href="{{ url_for('account.edit_profile') }}" class="item">Edit Profile</a>
         <a href="{{ url_for('account.manage') }}" class="item">Your Account</a>
         <a href="{{ url_for('account.logout') }}" class="item">Log out</a>
     {% else %}
         <a href="{{ url_for('account.register') }}" class="item">Register</a>
         <a href="{{ url_for('account.login') }}" class="item">Log in</a>
+    {% endif %}
+{% endmacro %}
+
+{% macro right_menu(current_user, mobile) %}
+    {% if not mobile %}
+        <div class="ui pointing dropdown link item">
+            <span class="text">{{ current_user.first_name }}</span>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                {{ dropdown_items(current_user) }}
+            </div>
+        </div>
+    {% else %}
+        {{ dropdown_items(current_user) }}
     {% endif %}
 {% endmacro %}
 
@@ -41,7 +57,7 @@
             {% if endpoints %}
                 {{ render_menu_items(endpoints) }}
             {% endif %}
-            {{ account_items(current_user) }}
+            {{ right_menu(current_user, mobile=True) }}
         </div>
     </div>
 {% endmacro %}
@@ -54,7 +70,7 @@
             <div class="ui container">
                 {{ header_items(current_user) }}
                 <div class="right menu">
-                    {{ account_items(current_user) }}
+                    {{ right_menu(current_user, mobile=False) }}
                 </div>
             </div>
         </div>

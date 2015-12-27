@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+  <div class="ui vertical stripe">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="six wide left floated column">
+          {% if user.profile_pic != '' %}
+            <img src="{{ user.profile_pic }}" class="ui bordered rounded image profile-pic">
+          {% else %}
+            <img src="http://www.ucalgary.ca/sap/files/sap/no-icon.png" class="ui bordered rounded image profile-pic">
+          {% endif %}
+        </div>
+        <div class="ui vertical divider"></div>
+          <div class="seven wide column">
+            <h1 class="ui header">{{ user.full_name() }}</h1>
+            <table class="ui very basic table">
+              <tbody>
+                <tr class="user-info">
+                  <td>
+                    <div class="ui red label">User Type</div>
+                  </td>
+                  <td>Student</td>
+                </tr>
+                {% if user.hometown != '' %}
+                  <tr class="user-info">
+                    <td>
+                      <div class="ui red label">Hometown</div>
+                    </td>
+                    <td>{{ user.hometown }}</td>
+                  </tr>
+                {% endif %}
+                <tr class="user-info">
+                  <td>
+                    <div class="ui red label">Email</div>
+                  </td>
+                  <td>{{ user.email }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui middle aligned stackable grid container">
+      {% if user.bio != '' %}
+        <div class="row">
+          <div class="fourteen wide column">
+            <h2 class="ui header">Bio</h2>
+            <p>{{ user.bio }}</p>
+          </div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="fourteen wide column stackable">
+          <h2 class="ui header">Tags</h2>
+          <div class="ui label two wide user-tag">
+            Math/Science
+            <a href="/stuff" class="detail">214</a>
+          </div>
+          <div class="ui label two wide user-tag">
+            Middle School
+            <a href="/stuff" class="detail">214</a>
+          </div>
+          <div class="ui label two wide user-tag">
+            Disabled Students
+            <a href="/stuff" class="detail">214</a>
+          </div>
+        </div>
+      </div>
+      <!--div class="row">
+        <div class="fourteen wide column">
+          <h2 class="ui header">Publications</h2>
+          <div class="ui bulleted list">
+            <div class="item">Publication 1</div>
+            <div class="item">Publication 2</div>
+            <div class="item">Publication 3</div>
+          </div>
+        </div>
+      </div-->
+    </div>
+{% endblock %}
