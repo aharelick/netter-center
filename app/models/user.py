@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, \
     BadSignature, SignatureExpired
 from .. import db, login_manager
+from tag import user_tag_association_table
 
 
 class Permission:
@@ -57,6 +58,9 @@ class User(UserMixin, db.Model):
     hometown = db.Column(db.String(64), default='')
     bio = db.Column(db.Text, default='')
     profile_pic = db.Column(db.Text, default='')
+    tags = db.relationship('Tag',
+                           secondary=user_tag_association_table,
+                           back_populates='users')
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)

@@ -7,6 +7,7 @@ from wtforms.fields import (
     SubmitField,
     TextAreaField
 )
+from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
 from wtforms.fields.html5 import EmailField, URLField
 from wtforms.validators import (
     InputRequired,
@@ -17,7 +18,8 @@ from wtforms.validators import (
     URL
 )
 from wtforms import ValidationError
-from ..models import User
+from ..models import User, Tag
+from .. import db
 
 
 class LoginForm(Form):
@@ -140,5 +142,9 @@ class EditProfileForm(Form):
         Optional()
     ])
     bio = TextAreaField('Bio', validators=[Optional()])
+    # TODO because of semantic ui, this doesn't actually query
+    tags = QuerySelectMultipleField('Tags',
+                                    get_label='name',
+                                    query_factory=lambda: Tag.query.all())
 
     submit = SubmitField('Save')

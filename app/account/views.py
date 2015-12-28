@@ -248,8 +248,7 @@ def edit_profile():
     form = EditProfileForm(obj=user)
     if form.validate_on_submit():
         form.populate_obj(user)
-        # TODO I don't think this actually gets displayed
-        flash('Your information was successfully changed.', 'form-success')
+        flash('Your information was successfully changed.', 'success')
         return redirect(url_for('account.my_profile'))
     return render_template('account/edit_profile.html', form=form)
 

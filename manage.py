@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from app import create_app, db
-from app.models import User, Role
+from app.models import User, Role, Tag
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -19,7 +19,7 @@ migrate = Migrate(app, db)
 
 
 def make_shell_context():
-    return dict(app=app, db=db, User=User, Role=Role)
+    return dict(app=app, db=db, User=User, Role=Role, Tag=Tag)
 
 
 manager.add_command('shell', Shell(make_context=make_shell_context))
@@ -47,16 +47,17 @@ def recreate_db():
 
 
 @manager.option('-n',
-                '--number-users',
+                '--number-fakes',
                 default=10,
                 type=int,
                 help='Number of each model type to create',
-                dest='number_users')
-def add_fake_data(number_users):
+                dest='number_fakes')
+def add_fake_data(number_fakes):
     """
     Adds fake data to the database.
     """
-    User.generate_fake(count=number_users)
+    User.generate_fake(count=number_fakes)
+    Tag.generate_fake(count=number_fakes)
 
 
 @manager.command
