@@ -145,6 +145,6 @@ class EditProfileForm(Form):
     # TODO because of semantic ui, this doesn't actually query
     tags = QuerySelectMultipleField('Tags',
                                     get_label='name',
-                                    query_factory=lambda: Tag.query.all())
+                                    query_factory=lambda: db.session.query(Tag))
 
     submit = SubmitField('Save')

@@ -75,13 +75,13 @@ class AdminCheckForm(Form):
 
 
 class EditTagInfo(Form):
-    name = StringField('Name', validators=[InputRequired(), Length(1, 64)])
+    name = StringField('Name', validators=[InputRequired()])
     description = TextAreaField('Description')
     submit = SubmitField('Save')
 
 
 class NewTag(Form):
-    name = StringField('Name', validators=[InputRequired(), Length(1, 64)])
+    name = StringField('Name', validators=[InputRequired()])
     description = TextAreaField('Description')
     submit = SubmitField('Save')
 
