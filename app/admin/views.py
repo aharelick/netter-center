@@ -8,10 +8,12 @@ from forms import (
     NewUserForm,
     ChangeAccountTypeForm,
     InviteUserForm,
-    AdminCheckForm
+    AdminCheckForm,
+    EditTagInfo,
+    NewTag
 )
 from . import admin
-from ..models import User, Role
+from ..models import User, Role, Tag
 from .. import db
 from ..email import send_email
 
@@ -184,4 +186,82 @@ def admin_check(user_id):
         else:
             form.admin_check.data = 'y' if user.admin_check else 'n'
         return render_template('admin/manage_user.html', user=user, form=form)
+
+
+@admin.route('/tags')
+@login_required
+@admin_required
+def registered_tags():
+    """View all registered tags."""
+    tags = Tag.query.all()
+    return render_template('admin/registered_tags.html', tags=tags)
+
+
+@admin.route('/tag/<int:tag_id>')
+@admin.route('/tag/<int:tag_id>/info')
+@login_required
+@admin_required
+def tag_info(tag_id):
+    """View a tag's information."""
+    tag = Tag.query.get(tag_id)
+    if tag is None:
+        abort(404)
+    return render_template('admin/manage_tag.html', tag=tag)
+
+
+@admin.route('/tag/<int:tag_id>/edit', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_tag_info(tag_id):
+    """Edit a tag's information."""
+    tag = Tag.query.get(tag_id)
+    if tag is None:
+        abort(404)
+    form = EditTagInfo(obj=tag)
+    if form.validate_on_submit():
+        form.populate_obj(tag)
+        return redirect(url_for('admin.tag_info', tag_id=tag.id))
+    return render_template('admin/manage_tag.html', tag=tag, form=form)
+
+
+@admin.route('/tag/<int:tag_id>/delete')
+@login_required
+@admin_required
+def delete_tag_request(tag_id):
+    """Display the section with the button to delete a tag."""
+    tag = Tag.query.get(tag_id)
+    if tag is None:
+        abort(404)
+    return render_template('admin/manage_tag.html', tag=tag)
+
+
+@admin.route('/tag/<int:tag_id>/_delete')
+@login_required
+@admin_required
+def delete_tag(tag_id):
+    """Delete a tag."""
+    tag = Tag.query.get(tag_id)
+    if tag is None:
+        abort(404)
+    db.session.delete(tag)
+    db.session.commit()
+    flash('Successfully deleted tag %s.' % tag.name, 'success')
+    return redirect(url_for('admin.registered_tags'))
+
+
+@admin.route('/tag/new', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def new_tag():
+    """Create a new tag."""
+    form = NewTag()
+    if form.validate_on_submit():
+        tag = Tag(name=form.name.data,
+                  description=form.description.data)
+        db.session.add(tag)
+        db.session.commit()
+        flash('%s tag successfully added.' % tag.name, 'success')
+        return redirect(url_for('admin.registered_tags'))
+    return render_template('admin/new_tag.html', form=form)
+
 

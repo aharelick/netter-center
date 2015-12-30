@@ -31,6 +31,7 @@ class DevelopmentConfig(Config):
     ASSETS_DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    # SQLALCHEMY_DATABASE_URI = 'postgres://localhost/dev_netter_center'
 
 
 class TestingConfig(Config):

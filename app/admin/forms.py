@@ -1,10 +1,16 @@
 from flask.ext.wtf import Form
-from wtforms.fields import StringField, PasswordField, SubmitField, RadioField
+from wtforms.fields import (
+    StringField,
+    PasswordField,
+    SubmitField,
+    RadioField,
+    TextAreaField
+)
 from wtforms.fields.html5 import EmailField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from wtforms import ValidationError
-from ..models import User, Role
+from ..models import User, Role, Tag
 from .. import db
 
 
@@ -66,3 +72,19 @@ class AdminCheckForm(Form):
                                 ('y', 'Confirmed'),
                                 ('n', 'Not Confirmed')])
     submit = SubmitField('Save')
+
+
+class EditTagInfo(Form):
+    name = StringField('Name', validators=[InputRequired()])
+    description = TextAreaField('Description')
+    submit = SubmitField('Save')
+
+
+class NewTag(Form):
+    name = StringField('Name', validators=[InputRequired()])
+    description = TextAreaField('Description')
+    submit = SubmitField('Save')
+
+    def validate_name(self, field):
+        if Tag.query.filter_by(name=field.data).first():
+            raise ValidationError('Tag name already exists.')

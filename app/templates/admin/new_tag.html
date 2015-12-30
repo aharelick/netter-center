@@ -7,7 +7,14 @@
 {% block content %}
     <div class="ui stackable centered grid container">
         <div class="twelve wide column">
-            <h2 class="ui header">Edit Profile</h2>
+            <a class="ui basic compact button" href="{{ url_for('admin.index') }}">
+                <i class="caret left icon"></i>
+                Back to dashboard
+            </a>
+            <h2 class="ui header">
+                Add New Tag
+                <div class="sub header">Create a new tag</div>
+            </h2>
 
             {% set flashes = {
                 'error':   get_flashed_messages(category_filter=['form-error']),
@@ -18,18 +25,10 @@
 
             {{ f.begin_form(form, flashes) }}
 
-                <div class="two fields">
-                    {{ f.render_form_field(form.first_name) }}
-                    {{ f.render_form_field(form.last_name) }}
-                </div>
+                {{ f.render_form_field(form.name) }}
 
-                {{ f.render_form_field(form.hometown) }}
+                {{ f.render_form_field(form.description) }}
 
-                {{ f.render_form_field(form.profile_pic) }}
-
-                {{ f.render_form_field(form.bio) }}
-
-                {{ f.render_form_field(form.tags) }}
 
                 {{ f.form_message(flashes['error'], header='Something went wrong.', class='error') }}
                 {{ f.form_message(flashes['warning'], header='Check your email.', class='warning') }}
