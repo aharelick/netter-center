@@ -61,7 +61,8 @@
             {% for tag in user.tags %}
               <div class="ui label two wide user-tag">
                 {{ tag.name }}
-                <a href="/stuff" class="detail">{{ tag.users|length }}</a>
+                <!-- TODO change this link to a tag result page -->
+                <a href="{{ url_for('account.my_profile') }}" class="detail">{{ tag.users|length }}</a>
               </div>
             {% endfor %}
           {% endif %}

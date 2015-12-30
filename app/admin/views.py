@@ -192,7 +192,7 @@ def admin_check(user_id):
 @login_required
 @admin_required
 def registered_tags():
-    """View all registered users."""
+    """View all registered tags."""
     tags = Tag.query.all()
     return render_template('admin/registered_tags.html', tags=tags)
 
@@ -239,7 +239,7 @@ def delete_tag_request(tag_id):
 @login_required
 @admin_required
 def delete_tag(tag_id):
-    """Delete a user's account."""
+    """Delete a tag."""
     tag = Tag.query.get(tag_id)
     if tag is None:
         abort(404)

@@ -5,7 +5,7 @@
 
 {% set endpoints = [
     ('admin.tag_info', 'Tag information'),
-    ('admin.edit_tag_info', 'Change tag information'),
+    ('admin.edit_tag_info', 'Edit tag information'),
     (deletion_endpoint, 'Delete tag')
 ] %}
 
@@ -67,7 +67,6 @@
                         <a class="ui disabled negative deletion button">
                             Delete this tag
                         </a>
-                    </div>
                     </div>
                 {% elif form %}
                     {{ f.render_form(form) }}

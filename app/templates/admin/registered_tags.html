@@ -35,13 +35,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for t in tags | sort(attribute='name') %}
-                        <tr onclick="window.location.href = '{{ url_for('admin.tag_info', tag_id=t.id) }}';">
-                            <td>{{ t.name }}</td>
-                            <td>{{ t.users|length }}</td>
-                            <td>{{ t.description }}</td>
-                        </tr>
-                    {% endfor %}
+                        {% for t in tags | sort(attribute='name') %}
+                            <tr onclick="window.location.href = '{{ url_for('admin.tag_info', tag_id=t.id) }}';">
+                                <td>{{ t.name }}</td>
+                                <td>{{ t.users|length }}</td>
+                                <td>{{ t.description }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
