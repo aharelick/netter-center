@@ -1,0 +1,21 @@
+{
+  "name": "Netter Center Directory",
+  "repository": "https://github.com/aharelick/netter-center",
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "env": {
+    "FLASK_CONFIG": {
+      "required": true
+    },
+    "SECRET_KEY": {
+      "required": true
+    },
+    "MAIL_USERNAME": {
+      "required": true
+    },
+    "MAIL_PASSWORD": {
+      "required": true
+    }
+  }
+}
