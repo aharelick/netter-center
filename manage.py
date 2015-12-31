@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from app import create_app, db
-from app.models import User, Role, Tag
+from app.models import User, Role, Tag, UserType
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -19,7 +19,8 @@ migrate = Migrate(app, db)
 
 
 def make_shell_context():
-    return dict(app=app, db=db, User=User, Role=Role, Tag=Tag)
+    return dict(app=app, db=db, User=User,
+                Role=Role, Tag=Tag, UserType=UserType)
 
 
 manager.add_command('shell', Shell(make_context=make_shell_context))
@@ -82,6 +83,7 @@ def setup_prod():
 def setup_general():
     """Runs the set-up needed for both local development and production."""
     Role.insert_roles()
+    UserType.insert_user_types()
 
 if __name__ == '__main__':
     manager.run()

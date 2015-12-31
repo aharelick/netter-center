@@ -10,7 +10,7 @@ from wtforms.fields.html5 import EmailField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import InputRequired, Length, Email, EqualTo
 from wtforms import ValidationError
-from ..models import User, Role, Tag
+from ..models import User, Role, Tag, UserType
 from .. import db
 
 
@@ -48,6 +48,12 @@ class InviteUserForm(Form):
                                                      Length(1, 64)])
     email = EmailField('Email', validators=[InputRequired(), Length(1, 64),
                                             Email()])
+    user_type = QuerySelectField('User Type',
+                                 validators=[InputRequired()],
+                                 get_label='name',
+                                 query_factory=lambda:
+                                 db.session.query(UserType))
+
     submit = SubmitField('Invite')
 
     def validate_email(self, field):

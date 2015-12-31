@@ -37,7 +37,8 @@ def new_user():
                     first_name=form.first_name.data,
                     last_name=form.last_name.data,
                     email=form.email.data,
-                    password=form.password.data)
+                    password=form.password.data,
+                    user_type=form.user_type.data)
         db.session.add(user)
         db.session.commit()
         flash('User {} successfully created'.format(user.full_name()),
@@ -55,7 +56,8 @@ def invite_user():
         user = User(role=form.role.data,
                     first_name=form.first_name.data,
                     last_name=form.last_name.data,
-                    email=form.email.data)
+                    email=form.email.data,
+                    user_type=form.user_type.data)
         db.session.add(user)
         db.session.commit()
         token = user.generate_confirmation_token()

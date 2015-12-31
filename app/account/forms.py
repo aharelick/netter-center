@@ -7,7 +7,10 @@ from wtforms.fields import (
     SubmitField,
     TextAreaField
 )
-from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
+from wtforms.ext.sqlalchemy.fields import (
+    QuerySelectMultipleField,
+    QuerySelectField
+)
 from wtforms.fields.html5 import EmailField, URLField
 from wtforms.validators import (
     InputRequired,
@@ -18,7 +21,7 @@ from wtforms.validators import (
     URL
 )
 from wtforms import ValidationError
-from ..models import User, Tag
+from ..models import User, Tag, UserType
 from .. import db
 
 
@@ -52,6 +55,12 @@ class RegistrationForm(Form):
         EqualTo('password2', 'Passwords must match')
     ])
     password2 = PasswordField('Confirm password', validators=[InputRequired()])
+    user_type = QuerySelectField('User Type',
+                                 validators=[InputRequired()],
+                                 get_label='name',
+                                 query_factory=lambda:
+                                 db.session.query(UserType))
+
     submit = SubmitField('Register')
 
     def validate_email(self, field):
