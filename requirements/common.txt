@@ -21,3 +21,4 @@ itsdangerous==0.24
 webassets==0.10.1
 wsgiref==0.1.2
 psycopg2==2.6.1
+jsmin==2.2.0
