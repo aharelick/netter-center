@@ -45,6 +45,32 @@ class Role(db.Model):
         return '<Role \'%s\'>' % self.name
 
 
+class UserType(db.Model):
+    __tablename__ = 'user_types'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text, unique=True)
+    users = db.relationship('User', backref='user_type', uselist=False)
+
+    @staticmethod
+    def insert_user_types():
+        user_types = [
+            'Student',
+            'Alumnus',
+            'Penn Faculty',
+            'Netter Center Staff',
+            'Community Member'
+        ]
+        for user_type_name in user_types:
+            user_type = UserType.query.filter_by(name=user_type_name).first()
+            if user_type is None:
+                user_type = UserType(name=user_type_name)
+                db.session.add(user_type)
+                db.session.commit()
+
+    def __repr__(self):
+        return '<UserType \'%s\'>' % self.name
+
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -61,6 +87,7 @@ class User(UserMixin, db.Model):
     tags = db.relationship('Tag',
                            secondary=user_tag_association_table,
                            back_populates='users')
+    user_type_id = db.Column(db.Integer, db.ForeignKey('user_types.id'))
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)

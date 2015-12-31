@@ -30,7 +30,7 @@
 {% endmacro %}
 
 {% macro right_menu(current_user, mobile) %}
-    {% if not mobile %}
+    {% if not mobile and current_user.is_authenticated() %}
         <div class="ui pointing dropdown link item">
             <span class="text">{{ current_user.first_name }}</span>
             <i class="dropdown icon"></i>

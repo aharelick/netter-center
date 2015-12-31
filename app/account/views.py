@@ -44,7 +44,8 @@ def register():
         user = User(first_name=form.first_name.data,
                     last_name=form.last_name.data,
                     email=form.email.data,
-                    password=form.password.data)
+                    password=form.password.data,
+                    user_type=form.user_type.data)
         db.session.add(user)
         db.session.commit()
         token = user.generate_confirmation_token()
@@ -277,6 +278,7 @@ def before_request():
 
 
 @account.route('/unconfirmed')
+@login_required
 def unconfirmed():
     """Catch users with unconfirmed emails."""
     if current_user.is_anonymous() or current_user.confirmed:
@@ -285,6 +287,7 @@ def unconfirmed():
 
 
 @account.route('/admin-check')
+@login_required
 def admin_check():
     """Catch users not confirmed by an administrator."""
     if current_user.is_anonymous() or current_user.admin_check:
