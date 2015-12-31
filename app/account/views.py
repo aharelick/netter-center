@@ -249,6 +249,8 @@ def edit_profile():
     form = EditProfileForm(obj=user)
     if form.validate_on_submit():
         form.populate_obj(user)
+        db.session.add(user)
+        db.session.commit()
         flash('Your information was successfully changed.', 'success')
         return redirect(url_for('account.my_profile'))
     return render_template('account/edit_profile.html', form=form)
