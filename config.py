@@ -10,11 +10,11 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SSL_DISABLE = True
 
-    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_SERVER = 'smtp.sendgrid.net' #'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = os.environ.get('SENDGRID_USERNAME') #os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('SENDGRID_PASSWORD') #os.environ.get('MAIL_PASSWORD')
 
     ADMIN_EMAIL = 'nettercenterdatabase@gmail.com'
     EMAIL_SUBJECT_PREFIX = '[{}]'.format(APP_NAME)
