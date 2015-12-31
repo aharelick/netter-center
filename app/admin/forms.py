@@ -48,7 +48,8 @@ class InviteUserForm(Form):
                                                      Length(1, 64)])
     email = EmailField('Email', validators=[InputRequired(), Length(1, 64),
                                             Email()])
-    user_type = QuerySelectField('User Type', validators=[InputRequired()],
+    user_type = QuerySelectField('User Type',
+                                 validators=[InputRequired()],
                                  get_label='name',
                                  query_factory=lambda:
                                  db.session.query(UserType))

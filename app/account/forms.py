@@ -5,7 +5,7 @@ from wtforms.fields import (
     PasswordField,
     BooleanField,
     SubmitField,
-    TextAreaField,
+    TextAreaField
 )
 from wtforms.ext.sqlalchemy.fields import (
     QuerySelectMultipleField,
@@ -55,7 +55,8 @@ class RegistrationForm(Form):
         EqualTo('password2', 'Passwords must match')
     ])
     password2 = PasswordField('Confirm password', validators=[InputRequired()])
-    user_type = QuerySelectField('User Type', validators=[InputRequired()],
+    user_type = QuerySelectField('User Type',
+                                 validators=[InputRequired()],
                                  get_label='name',
                                  query_factory=lambda:
                                  db.session.query(UserType))

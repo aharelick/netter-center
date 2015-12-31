@@ -49,7 +49,7 @@ class UserType(db.Model):
     __tablename__ = 'user_types'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, unique=True)
-    users = db.relationship('User', backref='user_type', uselist=False)
+    users = db.relationship('User', backref='user_type', lazy='dynamic')
 
     @staticmethod
     def insert_user_types():
