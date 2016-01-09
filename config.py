@@ -10,11 +10,10 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SSL_DISABLE = True
 
-    MAIL_SERVER = 'smtp.sendgrid.net' #'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('SENDGRID_USERNAME') #os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('SENDGRID_PASSWORD') #os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
     ADMIN_EMAIL = 'nettercenterdatabase@gmail.com'
     EMAIL_SUBJECT_PREFIX = '[{}]'.format(APP_NAME)
@@ -33,17 +32,22 @@ class DevelopmentConfig(Config):
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
     # SQLALCHEMY_DATABASE_URI = 'postgres://localhost/dev_netter_center'
 
+    MAIL_SERVER = 'smtp.googlemail.com'
+
 
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-test.sqlite')
+        'sqlite:///:memory:'
     WTF_CSRF_ENABLED = False
+
+    MAIL_SERVER = 'smtp.googlemail.com'
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+
+    MAIL_SERVER = 'smtp.sendgrid.net'
 
     @classmethod
     def init_app(cls, app):
@@ -80,19 +84,6 @@ class HerokuConfig(ProductionConfig):
         # Handle proxy server headers
         from werkzeug.contrib.fixers import ProxyFix
         app.wsgi_app = ProxyFix(app.wsgi_app)
-
-
-class UnixConfig(ProductionConfig):
-    @classmethod
-    def init_app(cls, app):
-        ProductionConfig.init_app(app)
-
-        # Log to syslog
-        import logging
-        from logging.handlers import SysLogHandler
-        syslog_handler = SysLogHandler()
-        syslog_handler.setLevel(logging.WARNING)
-        app.logger.addHandler(syslog_handler)
 
 
 config = {
