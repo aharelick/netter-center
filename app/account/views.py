@@ -272,7 +272,8 @@ def before_request():
     before accessing login-required routes.
     """
     if current_user.is_authenticated() and request.endpoint is not None and \
-            request.endpoint[:8] != 'account.' and request.endpoint != 'static':
+            request.endpoint[:8] != 'account.' and \
+            request.endpoint != 'static':
         if not current_user.confirmed:
             return redirect(url_for('account.unconfirmed'))
         elif not current_user.admin_check:

@@ -9,4 +9,3 @@ def index():
         return redirect(url_for('account.my_profile'))
     else:
         return render_template('main/homepage.html')
-
