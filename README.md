@@ -1,8 +1,5 @@
-# flask-base
+# Netter Center Database [![Circle CI](https://circleci.com/gh/aharelick/netter-center/tree/master.svg?style=svg)](https://circleci.com/gh/aharelick/netter-center/tree/master)
 
-## Synopsis
-
-A Flask application template with the boilerplate code already done for you.
 
 ## What's included?
 

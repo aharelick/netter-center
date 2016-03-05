@@ -249,6 +249,8 @@ def edit_profile():
     form = EditProfileForm(obj=user)
     if form.validate_on_submit():
         form.populate_obj(user)
+        db.session.add(user)
+        db.session.commit()
         flash('Your information was successfully changed.', 'success')
         return redirect(url_for('account.my_profile'))
     return render_template('account/edit_profile.html', form=form)
@@ -270,7 +272,8 @@ def before_request():
     before accessing login-required routes.
     """
     if current_user.is_authenticated() and request.endpoint is not None and \
-            request.endpoint[:8] != 'account.' and request.endpoint != 'static':
+            request.endpoint[:8] != 'account.' and \
+            request.endpoint != 'static':
         if not current_user.confirmed:
             return redirect(url_for('account.unconfirmed'))
         elif not current_user.admin_check:

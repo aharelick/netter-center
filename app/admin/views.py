@@ -265,5 +265,3 @@ def new_tag():
         flash('%s tag successfully added.' % tag.name, 'success')
         return redirect(url_for('admin.registered_tags'))
     return render_template('admin/new_tag.html', form=form)
-
-
