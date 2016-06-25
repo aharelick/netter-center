@@ -1,5 +1,4 @@
 # Netter Center Database [![Circle CI](https://circleci.com/gh/aharelick/netter-center/tree/master.svg?style=svg)](https://circleci.com/gh/aharelick/netter-center/tree/master)
-=======
 
 
 ## What's included?
@@ -13,19 +12,12 @@
 * gzip compression
 * gulp autoreload for quick static page debugging
 
-## Extensions
-
-Other branches include even more features
-
-* `admin-edit-static-pages`: allow administrators to edit static pages using the [ckeditor](http://ckeditor.com/) WYSIWYG editor 
-* `gulp-static-watcher`: quick and easy webpage refresh as static pages and assets are edited. 
-
 ## Setting up
 
 1. Clone the repo
 
     ```
-    $ git clone https://github.com/hack4impact/flask-base.git
+    $ git clone https://github.com/aharelick/netter-center.git
     $ cd flask-base
     ```
 
@@ -33,8 +25,8 @@ Other branches include even more features
 
     ```
     $ pip install virtualenv
-    $ virtualenv env
-    $ source env/bin/activate
+    $ virtualenv venv
+    $ source venv/bin/activate
     ```
 
 3. Install the dependencies
@@ -62,17 +54,11 @@ Other branches include even more features
     $ python manage.py add_fake_data
     ```
 
-7. [Optional. Only valid on `gulp-static-watcher` branch] Use gulp to live compile your files
-
-* Install the Live Reload browser plugin from [here](http://livereload.com/)
-* Run `npm install`
-* Run `gulp`
-
 
 ## Running the app
 
 ```
-$ source env/bin/activate
+$ source venv/bin/activate
 $ python manage.py runserver
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Restarting with stat
