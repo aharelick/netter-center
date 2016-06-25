@@ -1,4 +1,5 @@
 # Netter Center Database [![Circle CI](https://circleci.com/gh/aharelick/netter-center/tree/master.svg?style=svg)](https://circleci.com/gh/aharelick/netter-center/tree/master)
+=======
 
 
 ## What's included?
@@ -9,7 +10,15 @@
 * Flask-WTF for forms
 * Flask-Assets for asset management and SCSS compilation
 * Flask-Mail for sending emails
-* Automatic SSL + gzip compression
+* gzip compression
+* gulp autoreload for quick static page debugging
+
+## Extensions
+
+Other branches include even more features
+
+* `admin-edit-static-pages`: allow administrators to edit static pages using the [ckeditor](http://ckeditor.com/) WYSIWYG editor 
+* `gulp-static-watcher`: quick and easy webpage refresh as static pages and assets are edited. 
 
 ## Setting up
 
@@ -52,6 +61,13 @@
     ```
     $ python manage.py add_fake_data
     ```
+
+7. [Optional. Only valid on `gulp-static-watcher` branch] Use gulp to live compile your files
+
+* Install the Live Reload browser plugin from [here](http://livereload.com/)
+* Run `npm install`
+* Run `gulp`
+
 
 ## Running the app
 
@@ -138,3 +154,10 @@ $ python manage.py runserver
     ├── test_basics.py
     └── test_user_model.py
 ```
+
+## Contributing
+
+Contributions are welcome! Please check out our [Waffle board](https://waffle.io/hack4impact/flask-base) which automatically syncs with this project's GitHub issues.
+
+## License
+[MIT License](LICENSE.md)
