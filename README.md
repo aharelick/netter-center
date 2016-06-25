@@ -141,9 +141,5 @@ $ python manage.py runserver
     └── test_user_model.py
 ```
 
-## Contributing
-
-Contributions are welcome! Please check out our [Waffle board](https://waffle.io/hack4impact/flask-base) which automatically syncs with this project's GitHub issues.
-
 ## License
 [MIT License](LICENSE.md)
