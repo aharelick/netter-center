@@ -99,16 +99,6 @@ class ResetPasswordForm(Form):
             raise ValidationError('Unknown email address.')
 
 
-class CreatePasswordForm(Form):
-    password = PasswordField('Password', validators=[
-        InputRequired(),
-        EqualTo('password2', 'Passwords must match.')
-    ])
-    password2 = PasswordField('Confirm new password',
-                              validators=[InputRequired()])
-    submit = SubmitField('Set password')
-
-
 class ChangePasswordForm(Form):
     old_password = PasswordField('Old password', validators=[InputRequired()])
     new_password = PasswordField('New password', validators=[
