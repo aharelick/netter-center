@@ -20,7 +20,7 @@
                   <td>
                     <div class="ui red label">User Type</div>
                   </td>
-                  <td>Student</td>
+                  <td>{{ user.user_type.name }}</td>
                 </tr>
                 {% if user.hometown != '' %}
                   <tr class="user-info">

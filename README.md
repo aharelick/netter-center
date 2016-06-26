@@ -9,14 +9,15 @@
 * Flask-WTF for forms
 * Flask-Assets for asset management and SCSS compilation
 * Flask-Mail for sending emails
-* Automatic SSL + gzip compression
+* gzip compression
+* gulp autoreload for quick static page debugging
 
 ## Setting up
 
 1. Clone the repo
 
     ```
-    $ git clone https://github.com/hack4impact/flask-base.git
+    $ git clone https://github.com/aharelick/netter-center.git
     $ cd flask-base
     ```
 
@@ -24,8 +25,8 @@
 
     ```
     $ pip install virtualenv
-    $ virtualenv env
-    $ source env/bin/activate
+    $ virtualenv venv
+    $ source venv/bin/activate
     ```
 
 3. Install the dependencies
@@ -53,10 +54,11 @@
     $ python manage.py add_fake_data
     ```
 
+
 ## Running the app
 
 ```
-$ source env/bin/activate
+$ source venv/bin/activate
 $ python manage.py runserver
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  * Restarting with stat
@@ -138,3 +140,6 @@ $ python manage.py runserver
     ├── test_basics.py
     └── test_user_model.py
 ```
+
+## License
+[MIT License](LICENSE.md)
