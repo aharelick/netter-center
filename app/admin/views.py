@@ -5,9 +5,7 @@ from flask.ext.login import login_required, current_user
 
 from forms import (
     ChangeUserEmailForm,
-    NewUserForm,
     ChangeAccountTypeForm,
-    InviteUserForm,
     AdminCheckForm,
     EditTagInfo,
     NewTag
@@ -15,7 +13,6 @@ from forms import (
 from . import admin
 from ..models import User, Role, Tag
 from .. import db
-from ..email import send_email
 
 
 @admin.route('/')
@@ -24,52 +21,6 @@ from ..email import send_email
 def index():
     """Admin dashboard page."""
     return render_template('admin/index.html')
-
-
-@admin.route('/new-user', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def new_user():
-    """Create a new user."""
-    form = NewUserForm()
-    if form.validate_on_submit():
-        user = User(role=form.role.data,
-                    first_name=form.first_name.data,
-                    last_name=form.last_name.data,
-                    email=form.email.data,
-                    password=form.password.data,
-                    user_type=form.user_type.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('User {} successfully created'.format(user.full_name()),
-              'form-success')
-    return render_template('admin/new_user.html', form=form)
-
-
-@admin.route('/invite-user', methods=['GET', 'POST'])
-@login_required
-@admin_required
-def invite_user():
-    """Invites a new user to create an account and set their own password."""
-    form = InviteUserForm()
-    if form.validate_on_submit():
-        user = User(role=form.role.data,
-                    first_name=form.first_name.data,
-                    last_name=form.last_name.data,
-                    email=form.email.data,
-                    user_type=form.user_type.data)
-        db.session.add(user)
-        db.session.commit()
-        token = user.generate_confirmation_token()
-        send_email(user.email,
-                   'You Are Invited To Join',
-                   'account/email/invite',
-                   user=user,
-                   user_id=user.id,
-                   token=token)
-        flash('User {} successfully invited'.format(user.full_name()),
-              'form-success')
-    return render_template('admin/new_user.html', form=form)
 
 
 @admin.route('/users')
