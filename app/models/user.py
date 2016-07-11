@@ -7,6 +7,15 @@ from .. import db, login_manager
 from tag import user_tag_association_table
 
 
+AUTO_CONFIRM_EMAILS = (
+    '@wharton.upenn.edu',
+    '@sas.upenn.edu',
+    '@seas.upenn.edu',
+    '@nursing.upenn.edu',
+    '@upenn.edu'
+)
+
+
 class Permission:
     GENERAL = 0x01
     ADMINISTER = 0xff
@@ -98,6 +107,8 @@ class User(UserMixin, db.Model):
                 self.admin_check = True
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
+            if self.email.endswith(AUTO_CONFIRM_EMAILS):
+                self.admin_check = True
 
     def full_name(self):
         return '%s %s' % (self.first_name, self.last_name)

@@ -216,3 +216,16 @@ def new_tag():
         flash('%s tag successfully added.' % tag.name, 'success')
         return redirect(url_for('admin.registered_tags'))
     return render_template('admin/new_tag.html', form=form)
+
+
+@admin.before_request
+def before_request():
+    """
+    Force user to confirm email and be checked by an administrator
+    before accessing login-required routes.
+    """
+    if current_user.is_authenticated():
+        if not current_user.confirmed:
+            return redirect(url_for('account.unconfirmed'))
+        elif not current_user.admin_check:
+            return redirect(url_for('account.admin_check'))

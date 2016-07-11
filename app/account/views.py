@@ -52,7 +52,7 @@ def register():
                    'account/email/confirm', user=user, token=token)
         flash('A confirmation link has been sent to {}.'.format(user.email),
               'warning')
-        return redirect(url_for('main.index'))
+        return redirect(url_for('account.login'))
     return render_template('account/register.html', form=form)
 
 
@@ -221,15 +221,18 @@ def profile(user_id):
     return render_template('account/profile.html', user=user)
 
 
-@account.before_app_request
+@account.before_request
 def before_request():
     """
     Force user to confirm email and be checked by an administrator
     before accessing login-required routes.
     """
     if current_user.is_authenticated() and request.endpoint is not None and \
-            request.endpoint[:8] != 'account.' and \
-            request.endpoint != 'static':
+            request.endpoint != 'account.unconfirmed' and \
+            request.endpoint != 'account.admin_check' and \
+            request.endpoint != 'account.login' and \
+            request.endpoint != 'account.register' and \
+            request.endpoint != 'account.logout':
         if not current_user.confirmed:
             return redirect(url_for('account.unconfirmed'))
         elif not current_user.admin_check:
