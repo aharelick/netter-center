@@ -132,10 +132,10 @@ class EditProfileForm(Form):
         InputRequired(),
         Length(1, 64)
     ])
-    hometown = StringField('Hometown', validators=[
-        Length(1, 64),
-        Optional()
-    ])
+    location = StringField('Current City & State of Residence',
+                           validators=[Length(1, 64), Optional()],
+                           default='Philadelphia, PA')
+
     profile_pic = URLField('Link to Profile Picture', validators=[
         URL(),
         Optional()

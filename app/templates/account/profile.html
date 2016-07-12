@@ -8,7 +8,7 @@
           {% if user.profile_pic != '' %}
             <img src="{{ user.profile_pic }}" class="ui bordered rounded image profile-pic">
           {% else %}
-            <img src="http://www.ucalgary.ca/sap/files/sap/no-icon.png" class="ui bordered rounded image profile-pic">
+            <img src="{{ url_for('static', filename='images/no-prof-pic.png') }}" class="ui bordered rounded image profile-pic">
           {% endif %}
         </div>
         <div class="ui vertical divider"></div>
@@ -22,12 +22,12 @@
                   </td>
                   <td>{{ user.user_type.name }}</td>
                 </tr>
-                {% if user.hometown != '' %}
+                {% if user.location != '' %}
                   <tr class="user-info">
                     <td>
-                      <div class="ui red label">Hometown</div>
+                      <div class="ui red label">Current City & State</div>
                     </td>
-                    <td>{{ user.hometown }}</td>
+                    <td>{{ user.location }}</td>
                   </tr>
                 {% endif %}
                 <tr class="user-info">

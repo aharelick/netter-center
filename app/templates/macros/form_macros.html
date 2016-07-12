@@ -111,6 +111,6 @@
         {{ render_form(field) }}
     {% else %}
         {{ field.label }}
-        {{ field(placeholder=field.label.text) }}
+        {{ field(placeholder=(field.default if field.default else field.label.text)) }}
     {% endif %}
 {% endmacro %}

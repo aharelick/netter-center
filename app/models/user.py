@@ -90,7 +90,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-    hometown = db.Column(db.String(64), default='')
+    location = db.Column(db.String(64), default='')
     bio = db.Column(db.Text, default='')
     profile_pic = db.Column(db.Text, default='')
     tags = db.relationship('Tag',
@@ -217,7 +217,7 @@ class User(UserMixin, db.Model):
                 admin_check=True,
                 role=choice(roles),
                 bio=fake.paragraph(),
-                hometown=(fake.city() + ', ' + fake.state_abbr()),
+                location=(fake.city() + ', ' + fake.state_abbr()),
                 profile_pic=fake.image_url(),
                 **kwargs
             )
@@ -239,6 +239,7 @@ class User(UserMixin, db.Model):
             password=password,
             confirmed=True,
             admin_check=True,
+            user_type=UserType.query.first(),
             role=Role.query.filter_by(
                 permissions=Permission.ADMINISTER).first()
         )
